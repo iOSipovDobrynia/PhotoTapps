@@ -25,11 +25,6 @@ final class PhotosCollectionViewController: UICollectionViewController {
         "cat12"
     ]
     
-    // MARK: - View's life cycle
-    override func viewDidLoad() {
-        super.viewDidLoad()
-    }
-    
     // MARK: - Navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         guard let photoVC = segue.destination as? PhotoViewController else { return }
