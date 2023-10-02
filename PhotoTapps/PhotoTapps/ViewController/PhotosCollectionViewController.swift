@@ -29,6 +29,13 @@ final class PhotosCollectionViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
     }
+    
+    // MARK: - Navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        guard let photoVC = segue.destination as? PhotoViewController else { return }
+        let cell = sender as? PhotoCell
+        photoVC.image = cell?.catImage.image
+    }
 }
 
 // MARK: - UICollectionViewDelegate
