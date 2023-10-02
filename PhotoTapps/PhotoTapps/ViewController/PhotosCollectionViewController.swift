@@ -7,10 +7,24 @@
 
 import UIKit
 
-private let reuseIdentifier = "Cell"
-
 final class PhotosCollectionViewController: UICollectionViewController {
 
+    // MARK: - Private properties
+    private let photos = [
+        "cat1",
+        "cat2",
+        "cat3",
+        "cat4",
+        "cat5",
+        "cat6",
+        "cat7",
+        "cat8",
+        "cat9",
+        "cat10",
+        "cat11",
+        "cat12"
+    ]
+    
     // MARK: - View's life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -25,11 +39,14 @@ extension PhotosCollectionViewController {
 // MARK: - UICollectionViewDataSource
 extension PhotosCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return photos.count
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: reuseIdentifier, for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: PhotoCell.reuseIdentifier, for: indexPath)
+        guard let cell = cell as? PhotoCell else { return UICollectionViewCell() }
+        let photo = photos[indexPath.item]
+        cell.configure(with: photo)
         return cell
     }
 }
@@ -37,7 +54,7 @@ extension PhotosCollectionViewController {
 // MARK: - UICollectionViewDelegateFlowLayout
 extension PhotosCollectionViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let itemsPerRow: CGFloat = 3
+        let itemsPerRow: CGFloat = 2
         let paddingWidth = 20 * (itemsPerRow + 1)
         let availableWidth = collectionView.frame.width - paddingWidth
         let widthPerItem = availableWidth / itemsPerRow
